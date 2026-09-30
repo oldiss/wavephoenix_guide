@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>WavePhoenix Wireless Receiver — Official User Guide</title>
-  <meta name="description" content="Complete step-by-step user manual, pairing instructions, and troubleshooting for the open-source WavePhoenix GameCube wireless receiver.">
+  <meta name="description" content="Complete mobile-friendly step-by-step user manual, pairing instructions, and troubleshooting for the open-source WavePhoenix GameCube wireless receiver.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +34,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -47,18 +48,20 @@
     /* Ambient Background Glows */
     .glow-bg {
       position: fixed;
-      top: -200px;
+      top: -150px;
       left: 50%;
       transform: translateX(-50%);
-      width: 1000px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(99, 85, 164, 0.25) 0%, rgba(124, 93, 250, 0.15) 40%, rgba(15, 12, 27, 0) 70%);
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99, 85, 164, 0.3) 0%, rgba(124, 93, 250, 0.15) 40%, rgba(15, 12, 27, 0) 70%);
       z-index: -1;
       pointer-events: none;
     }
 
     /* Container */
     .container {
+      width: 100%;
       max-width: 1140px;
       margin: 0 auto;
       padding: 0 24px;
@@ -66,53 +69,57 @@
 
     /* Header / Navbar */
     header {
-      padding: 24px 0;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border-color);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 12, 27, 0.85);
+      background: rgba(15, 12, 27, 0.9);
     }
 
     .nav-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 800;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: #fff;
       text-decoration: none;
+      flex-shrink: 0;
     }
 
     .logo-badge {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       background: linear-gradient(135deg, var(--purple-primary), var(--gc-indigo));
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 0 16px var(--purple-glow);
+      font-size: 1.1rem;
     }
 
     .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 16px;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
+      font-weight: 600;
+      font-size: 0.9rem;
       transition: color 0.2s ease;
     }
 
@@ -122,7 +129,7 @@
 
     /* Hero Section */
     .hero {
-      padding: 80px 0 60px;
+      padding: 60px 0 40px;
       text-align: center;
     }
 
@@ -137,44 +144,46 @@
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--purple-primary);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .hero-title {
-      font-size: 3.25rem;
+      font-size: 3rem;
       font-weight: 800;
       line-height: 1.15;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
       max-width: 680px;
-      margin: 0 auto 36px;
+      margin: 0 auto 32px;
     }
 
     .hero-cta {
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 14px 28px;
+      padding: 14px 26px;
       border-radius: var(--radius-md);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       text-decoration: none;
       transition: all 0.25s ease;
       cursor: pointer;
+      min-height: 48px;
     }
 
     .btn-primary {
@@ -184,7 +193,7 @@
       border: none;
     }
 
-    .btn-primary:hover {
+    .btn-primary:active, .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 32px rgba(124, 93, 250, 0.5);
     }
@@ -195,21 +204,16 @@
       border: 1px solid var(--border-color);
     }
 
-    .btn-secondary:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Hardware Showcase */
+    /* Showcase Section */
     .showcase {
-      margin: 40px 0 80px;
+      margin: 40px 0 60px;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 40px;
+      padding: 32px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 32px;
       align-items: center;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
@@ -232,22 +236,23 @@
 
     .status-pill {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
+      bottom: 12px;
+      left: 12px;
       background: rgba(15, 12, 27, 0.9);
       border: 1px solid var(--border-color);
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 999px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
+      gap: 8px;
+      font-size: 0.8rem;
       font-weight: 600;
+      backdrop-filter: blur(8px);
     }
 
     .dot-green {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       background-color: var(--green-accent);
       border-radius: 50%;
       box-shadow: 0 0 10px var(--green-accent);
@@ -261,35 +266,35 @@
     }
 
     .showcase-details h3 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .feature-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-top: 24px;
+      gap: 14px;
+      margin-top: 20px;
     }
 
     .feature-item {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: flex-start;
     }
 
     .feature-icon {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       background: rgba(16, 185, 129, 0.15);
       color: var(--green-accent);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       flex-shrink: 0;
       margin-top: 2px;
     }
@@ -299,14 +304,14 @@
       background: linear-gradient(135deg, rgba(99, 85, 164, 0.15), rgba(24, 20, 42, 0.9));
       border: 1px solid var(--border-glow);
       border-radius: var(--radius-lg);
-      padding: 32px;
-      margin-bottom: 60px;
+      padding: 28px;
+      margin-bottom: 50px;
     }
 
     .checklist-title {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -314,25 +319,21 @@
 
     .checklist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
     }
 
     .check-item {
-      background: rgba(15, 12, 27, 0.6);
+      background: rgba(15, 12, 27, 0.7);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 16px 20px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       cursor: pointer;
       user-select: none;
-      transition: all 0.2s ease;
-    }
-
-    .check-item:hover {
-      border-color: rgba(255, 255, 255, 0.2);
+      font-size: 0.9rem;
     }
 
     .check-item input[type="checkbox"] {
@@ -340,30 +341,50 @@
       height: 20px;
       accent-color: var(--purple-primary);
       cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Diagram Overview Header */
+    .diagram-container {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .diagram-container h3 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .diagram-container img {
+      width: 100%;
+      max-width: 960px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
 
     /* Steps Section */
     .section-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
 
     .section-title {
-      font-size: 2.25rem;
+      font-size: 2.1rem;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .section-subtitle {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 1rem;
     }
 
     .steps-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      margin-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      margin-bottom: 60px;
     }
 
     .step-card {
@@ -374,19 +395,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .step-card:hover {
-      border-color: var(--border-glow);
-    }
-
-    .step-card.reverse {
-      grid-template-columns: 1fr 1fr;
     }
 
     .step-content {
-      padding: 40px;
+      padding: 36px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -396,33 +408,34 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       background: var(--purple-primary);
       color: #fff;
       font-weight: 800;
       border-radius: var(--radius-sm);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       box-shadow: 0 0 12px var(--purple-glow);
     }
 
     .step-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .step-desc {
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
     }
 
     .step-tip {
       background: rgba(16, 185, 129, 0.1);
       border-left: 3px solid var(--green-accent);
-      padding: 12px 16px;
+      padding: 12px 14px;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #e2e8f0;
     }
 
@@ -439,34 +452,32 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .step-card:hover .step-image img {
-      transform: scale(1.03);
     }
 
     /* Comparison Table */
     .comparison-section {
-      margin-bottom: 80px;
+      margin-bottom: 60px;
     }
 
     .table-wrapper {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      overflow: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
+      min-width: 600px;
     }
 
     th, td {
-      padding: 18px 24px;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
     }
 
     th {
@@ -479,15 +490,15 @@
       border-bottom: none;
     }
 
-    /* Troubleshooting Accordion */
+    /* FAQ Accordion */
     .faq-section {
-      margin-bottom: 80px;
+      margin-bottom: 60px;
     }
 
     .faq-grid {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .faq-item {
@@ -498,21 +509,23 @@
     }
 
     .faq-question {
-      padding: 20px 24px;
+      padding: 18px 20px;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
       user-select: none;
+      min-height: 52px;
     }
 
     .faq-question::after {
       content: '+';
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--purple-primary);
       transition: transform 0.2s ease;
+      margin-left: 12px;
     }
 
     .faq-item.active .faq-question::after {
@@ -520,9 +533,11 @@
     }
 
     .faq-answer {
-      padding: 0 24px 20px;
+      padding: 0 20px 18px;
       color: var(--text-muted);
       display: none;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
     .faq-item.active .faq-answer {
@@ -532,10 +547,10 @@
     /* Footer */
     footer {
       border-top: 1px solid var(--border-color);
-      padding: 40px 0;
+      padding: 36px 0;
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     footer a {
@@ -543,28 +558,163 @@
       text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 900px) {
-      .showcase {
-        grid-template-columns: 1fr;
+    /* ====================================================== */
+    /* 📱 MOBILE OPTIMIZATION MEDIA QUERIES (< 768px)         */
+    /* ====================================================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
       }
 
-      .step-card, .step-card.reverse {
-        grid-template-columns: 1fr;
+      header {
+        padding: 14px 0;
       }
 
-      .step-image {
-        border-left: none;
-        border-top: 1px solid var(--border-color);
-        max-height: 320px;
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      /* Touch-friendly horizontal scroll navigation bar */
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 4px;
+        gap: 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links li a {
+        display: inline-block;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+        font-size: 0.82rem;
+        border: 1px solid var(--border-color);
+      }
+
+      .hero {
+        padding: 32px 0 24px;
+      }
+
+      .hero-badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+        margin-bottom: 14px;
       }
 
       .hero-title {
-        font-size: 2.4rem;
+        font-size: 1.85rem;
+        line-height: 1.25;
+        margin-bottom: 12px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .showcase {
+        padding: 20px 16px;
+        margin: 24px 0 36px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .showcase-details h3 {
+        font-size: 1.35rem;
+      }
+
+      .checklist-card {
+        padding: 20px 16px;
+        margin-bottom: 36px;
+      }
+
+      .checklist-title {
+        font-size: 1.15rem;
+      }
+
+      .checklist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .check-item {
+        padding: 12px 14px;
+      }
+
+      .section-title {
+        font-size: 1.55rem;
+      }
+
+      .section-subtitle {
+        font-size: 0.88rem;
+      }
+
+      .steps-grid {
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .step-card {
+        grid-template-columns: 1fr;
+        border-radius: var(--radius-md);
+      }
+
+      /* Move step image to top on mobile */
+      .step-image {
+        order: -1;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+        max-height: 240px;
+      }
+
+      .step-content {
+        padding: 20px 16px;
+      }
+
+      .step-title {
+        font-size: 1.2rem;
+      }
+
+      .step-desc {
+        font-size: 0.88rem;
+        margin-bottom: 12px;
+      }
+
+      .step-tip {
+        font-size: 0.82rem;
+        padding: 10px 12px;
+      }
+
+      th, td {
+        padding: 12px 14px;
+        font-size: 0.82rem;
+      }
+
+      .faq-question {
+        padding: 16px;
+        font-size: 0.92rem;
+      }
+
+      .faq-answer {
+        padding: 0 16px 14px;
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -583,8 +733,8 @@
       <ul class="nav-links">
         <li><a href="#setup">Setup Guide</a></li>
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#specs">Comparison</a></li>
-        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#troubleshooting">FAQ</a></li>
         <li><a href="https://github.com/loopj/wavephoenix" target="_blank">GitHub</a></li>
       </ul>
     </div>
@@ -594,15 +744,15 @@
   <section class="hero">
     <div class="container">
       <div class="hero-badge">
-        <span>⚡ Open-Source Wireless GameCube Hardware</span>
+        <span>⚡ Open-Source GameCube Hardware</span>
       </div>
       <h1 class="hero-title">WavePhoenix Receiver<br>Official User Guide</h1>
       <p class="hero-subtitle">
-        A modern, drop-in replacement for the Nintendo WaveBird RF receiver created by James Smith (<code>loopj</code>). Feature-packed with <strong>Virtual Pairing</strong>, <strong>LED Link Status</strong>, and <strong>Bluetooth Firmware Updates</strong>.
+        A modern, drop-in replacement for the Nintendo WaveBird RF receiver created by James Smith (<code>loopj</code>). Built with <strong>Virtual Pairing</strong>, <strong>LED Status Indicator</strong>, and <strong>Bluetooth Updates</strong>.
       </p>
       <div class="hero-cta">
         <a href="#setup" class="btn btn-primary">Start Pairing Steps →</a>
-        <a href="https://github.com/loopj/wavephoenix" target="_blank" class="btn btn-secondary">View Repository</a>
+        <a href="https://github.com/loopj/wavephoenix" target="_blank" class="btn btn-secondary">View GitHub Project</a>
       </div>
     </div>
   </section>
@@ -612,37 +762,37 @@
     <!-- Hardware Showcase -->
     <section class="showcase" id="overview">
       <div class="showcase-image-wrapper">
-        <img src="images/wavephoenix_purple_photo.png" alt="WavePhoenix Purple Receiver">
+        <img src="images/wavephoenix_purple_photo.png" alt="WavePhoenix Purple Receiver Photo" loading="lazy">
         <div class="status-pill">
           <div class="dot-green"></div>
-          <span>Status: Green LED Linked</span>
+          <span>Status: Solid Green LED</span>
         </div>
       </div>
       <div class="showcase-details">
         <h3>Compact & Modern Hardware</h3>
-        <p style="color: var(--text-muted);">
-          Say goodbye to hard-to-find, expensive original WaveBird dongles. The WavePhoenix fits directly into any GameCube controller port and pairs in seconds with your original WaveBird controller.
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          No more hunting for expensive, hard-to-find OEM WaveBird dongles. The WavePhoenix plugs directly into your GameCube controller port and pairs seamlessly with your original WaveBird controller.
         </p>
         <ul class="feature-list">
           <li class="feature-item">
             <div class="feature-icon">✓</div>
             <div>
               <strong>One-Touch Virtual Pairing</strong><br>
-              <span style="font-size:0.9rem; color:var(--text-muted);">No mechanical channel dials needed on the receiver. Press the front button to scan instantly.</span>
+              <span style="font-size:0.85rem; color:var(--text-muted);">No manual channel wheels needed on the receiver. Press the front button to scan automatically.</span>
             </div>
           </li>
           <li class="feature-item">
             <div class="feature-icon">✓</div>
             <div>
               <strong>Multi-Color Status LED</strong><br>
-              <span style="font-size:0.9rem; color:var(--text-muted);">Visual confirmation of power, active signal search, and active connection.</span>
+              <span style="font-size:0.85rem; color:var(--text-muted);">Instant visual feedback for power, pairing search mode, and successful wireless connection.</span>
             </div>
           </li>
           <li class="feature-item">
             <div class="feature-icon">✓</div>
             <div>
-              <strong>Console & Adapter Support</strong><br>
-              <span style="font-size:0.9rem; color:var(--text-muted);">Fully compatible with GameCube, Wii, and USB GameCube Controller Adapters (Switch/PC).</span>
+              <strong>Universal Controller Port Support</strong><br>
+              <span style="font-size:0.85rem; color:var(--text-muted);">Works out of the box with GameCube, Wii, and USB GameCube Controller Adapters (Switch/PC).</span>
             </div>
           </li>
         </ul>
@@ -671,9 +821,9 @@
     </section>
 
     <!-- Overview Component Diagram -->
-    <div style="margin-bottom: 60px; text-align: center;">
-      <h3 style="font-size: 1.5rem; margin-bottom: 16px;">Component & Connection Diagram</h3>
-      <img src="images/overview_diagram.jpg" alt="Component Diagram" style="width: 100%; max-width: 960px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 12px 32px rgba(0,0,0,0.5);">
+    <div class="diagram-container">
+      <h3>Component & Layout Overview</h3>
+      <img src="images/overview_diagram.jpg" alt="WavePhoenix Hardware Diagram" loading="lazy">
     </div>
 
     <!-- Step-by-Step Instructions -->
@@ -687,6 +837,9 @@
 
         <!-- Step 1 -->
         <div class="step-card">
+          <div class="step-image">
+            <img src="images/step1_plug_receiver.jpg" alt="Step 1: Plug receiver into Port 1" loading="lazy">
+          </div>
           <div class="step-content">
             <div class="step-number">1</div>
             <h3 class="step-title">Plug Receiver into Controller Port</h3>
@@ -694,16 +847,16 @@
               Insert your WavePhoenix receiver module firmly into Controller Port 1 (or Ports 2–4 for additional players) on your GameCube, Wii, or USB Adapter.
             </p>
             <div class="step-tip">
-              💡 <strong>Tip:</strong> Ensure the 6-pin connector is aligned properly before pushing it all the way into the port.
+              💡 <strong>Tip:</strong> Ensure the 6-pin connector is aligned properly before pushing it into the port.
             </div>
-          </div>
-          <div class="step-image">
-            <img src="images/step1_plug_receiver.jpg" alt="Step 1: Plug receiver into Port 1">
           </div>
         </div>
 
         <!-- Step 2 -->
-        <div class="step-card reverse">
+        <div class="step-card">
+          <div class="step-image">
+            <img src="images/step2_press_button.jpg" alt="Step 2: Press Front Pairing Button" loading="lazy">
+          </div>
           <div class="step-content">
             <div class="step-number">2</div>
             <h3 class="step-title">Press Front Pairing Button</h3>
@@ -711,16 +864,16 @@
               Press the circular button on the front face of your WavePhoenix receiver. The green LED light right below the button will start <strong>flashing rapidly</strong>.
             </p>
             <div class="step-tip">
-              ⚡ <strong>Search Mode:</strong> Rapid blinking means the receiver is actively scanning for an incoming controller transmission.
+              ⚡ <strong>Search Mode:</strong> Rapid blinking indicates the receiver is actively searching for a controller signal.
             </div>
-          </div>
-          <div class="step-image">
-            <img src="images/step2_press_button.jpg" alt="Step 2: Press Front Pairing Button">
           </div>
         </div>
 
         <!-- Step 3 -->
         <div class="step-card">
+          <div class="step-image">
+            <img src="images/step3_hold_xy.jpg" alt="Step 3: Hold X and Y Buttons" loading="lazy">
+          </div>
           <div class="step-content">
             <div class="step-number">3</div>
             <h3 class="step-title">Power ON Controller & Hold X + Y</h3>
@@ -728,16 +881,16 @@
               Slide the power switch on your WaveBird controller to the <strong>ON</strong> position. Press and hold both the <strong>X</strong> and <strong>Y</strong> buttons simultaneously for 1–2 seconds.
             </p>
             <div class="step-tip">
-              🎮 <strong>Technique:</strong> Hold down X and Y firmly together until the receiver registers the signal.
+              🎮 <strong>Technique:</strong> Press and hold X and Y firmly together until the receiver locks onto the signal.
             </div>
-          </div>
-          <div class="step-image">
-            <img src="images/step3_hold_xy.jpg" alt="Step 3: Hold X and Y Buttons">
           </div>
         </div>
 
         <!-- Step 4 -->
-        <div class="step-card reverse">
+        <div class="step-card">
+          <div class="step-image">
+            <img src="images/step4_connected_led.jpg" alt="Step 4: Solid Green LED Connected" loading="lazy">
+          </div>
           <div class="step-content">
             <div class="step-number">4</div>
             <h3 class="step-title">Confirm Solid Green Light (Connected)</h3>
@@ -745,11 +898,8 @@
               Once paired, the LED light on the front of the WavePhoenix receiver will stop flashing and turn <strong>Solid Green</strong>. You are ready to play!
             </p>
             <div class="step-tip">
-              ✨ <strong>Success:</strong> Virtual Pairing automatically remembers your controller settings for future gameplay.
+              ✨ <strong>Success:</strong> Virtual Pairing automatically remembers your controller link for future gaming sessions.
             </div>
-          </div>
-          <div class="step-image">
-            <img src="images/step4_connected_led.jpg" alt="Step 4: Solid Green LED Connected">
           </div>
         </div>
 
@@ -759,8 +909,8 @@
     <!-- Comparison Table -->
     <section class="comparison-section" id="specs">
       <div class="section-header">
-        <h2 class="section-title">WavePhoenix vs Original Receiver</h2>
-        <p class="section-subtitle">Comparison of features between OEM Nintendo receiver and WavePhoenix.</p>
+        <h2 class="section-title">WavePhoenix vs OEM Receiver</h2>
+        <p class="section-subtitle">Comparison of features between original Nintendo receiver and WavePhoenix.</p>
       </div>
 
       <div class="table-wrapper">
@@ -768,7 +918,7 @@
           <thead>
             <tr>
               <th>Feature</th>
-              <th>Original Nintendo WaveBird Receiver</th>
+              <th>Original WaveBird Receiver</th>
               <th>WavePhoenix Receiver</th>
             </tr>
           </thead>
@@ -785,12 +935,12 @@
             </tr>
             <tr>
               <td><strong>Firmware Upgrades</strong></td>
-              <td>Not Possible (Fixed HW)</td>
+              <td>Not Supported</td>
               <td><strong>Bluetooth / OTA Updates</strong></td>
             </tr>
             <tr>
               <td><strong>Availability</strong></td>
-              <td>Discontinued & Rare</td>
+              <td>Rare & Expensive</td>
               <td><strong>Open-Source (DIY & Pre-Assembled)</strong></td>
             </tr>
           </tbody>
@@ -798,7 +948,7 @@
       </div>
     </section>
 
-    <!-- Troubleshooting FAQ -->
+    <!-- FAQ Accordion -->
     <section class="faq-section" id="troubleshooting">
       <div class="section-header">
         <h2 class="section-title">Troubleshooting & FAQ</h2>
@@ -809,28 +959,28 @@
         <div class="faq-item">
           <div class="faq-question">Why does the receiver LED keep flashing rapidly?</div>
           <div class="faq-answer">
-            The receiver timed out before receiving the <code>X + Y</code> signal. Make sure your WaveBird power switch is set to ON, press the front pairing button on WavePhoenix again, and hold <code>X + Y</code> for 2 seconds.
+            The receiver timed out before detecting the <code>X + Y</code> signal. Verify that your WaveBird power switch is ON, press the front button on WavePhoenix again, and hold <code>X + Y</code> for 2 seconds.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">Does the channel dial on the WaveBird controller matter?</div>
+          <div class="faq-question">Does the channel dial on the WaveBird matter?</div>
           <div class="faq-answer">
-            No! You can set the channel dial on your WaveBird controller to any number from 1 to 16. WavePhoenix's Virtual Pairing scans across all channels to find and lock onto your controller automatically.
+            No! You can set the channel dial on your WaveBird to any channel (1–16). WavePhoenix's Virtual Pairing scans across all channels to find and lock onto your controller automatically.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">Can I use 4 WavePhoenix receivers at the same time?</div>
+          <div class="faq-question">Can I use 4 WavePhoenix receivers simultaneously?</div>
           <div class="faq-answer">
             Yes! Plug receivers into Ports 1, 2, 3, and 4. Set each WaveBird controller to a different channel dial number (e.g. 1, 5, 9, 13) and pair each one individually using the button press + <code>X + Y</code> procedure.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">What should I do if the receiver LED doesn't turn on at all?</div>
+          <div class="faq-question">What if the receiver LED doesn't turn on at all?</div>
           <div class="faq-answer">
-            Ensure the receiver is pushed firmly into the controller port. Verify that your GameCube or USB Adapter is receiving power.
+            Push the receiver firmly into the controller port. Ensure your GameCube, Wii, or USB Adapter is receiving power.
           </div>
         </div>
       </div>
@@ -841,8 +991,8 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>WavePhoenix is an open-source project created by <strong>James Smith (loopj)</strong>.</p>
-      <p style="margin-top: 8px;">Documentation & User Guide created for retro gaming enthusiasts. <a href="https://github.com/loopj/wavephoenix" target="_blank">View GitHub Project</a></p>
+      <p>WavePhoenix is an open-source project by <strong>James Smith (loopj)</strong>.</p>
+      <p style="margin-top: 8px;">Mobile-optimized user manual. <a href="https://github.com/loopj/wavephoenix" target="_blank">View GitHub Repository</a></p>
     </div>
   </footer>
 
